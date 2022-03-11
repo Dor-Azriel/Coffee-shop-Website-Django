@@ -1,0 +1,18 @@
+{% extends "Base.html" %}
+{% block content %}
+
+    {% for menu in list %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <small class="text-muted">{{ menu.strat_hour }}</small>
+                <small class="text-muted"> - </small>
+              <small class="text-muted">{{ menu.end_hour}}</small>
+            </div>
+          <center> <h4><a class="article-title" href="{% url 'show_menu' menu.id %}">{{ menu.name }}</a></h4></center>
+
+
+              </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

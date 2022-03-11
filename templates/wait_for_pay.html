@@ -1,0 +1,40 @@
+{% extends "brista_Base.html" %}
+{% block content %}
+<style>
+aside {
+  width: 45%;
+  padding-left: 5px;
+  margin-left: 5px;
+  float: right;
+  font-style: italic;
+  background-color: lightgray;
+}
+</style>
+
+
+    {% for order in orders %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="{% url "order_details" order.id %}"> Order number -  {{ order.id }}</a>
+              <small class="text-muted">{{ order.time|date:"F d, Y - H:m:s" }}</small>
+
+
+            </div>
+              <p></p>
+              <p>Summary -{{ order.summary }} ₪</p>
+              <p>Table number - {{ order.table.id }} <small class="text-muted"> Located {{ order.table.loc }} </small> </p>
+
+          <form role="form" action="#" method="POST">
+                    {% csrf_token %}
+                        <input name="num" type="hidden" value={{ order.id }}>
+                     <input type="submit" name="pay" value="Take Payment" >
+                 </form>
+
+
+              </div>
+
+        </article>
+    {% endfor %}
+{% endblock content %}
+

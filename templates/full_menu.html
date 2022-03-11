@@ -1,0 +1,100 @@
+{% extends "Base.html" %}
+{% block content %}
+<style>
+aside {
+  width: 45%;
+  padding-left: 5px;
+  margin-left: 5px;
+  float: right;
+  font-style: italic;
+  background-color: lightgray;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <small class="text-muted">available only in - {{ menu.strat_hour }}</small>
+                <small class="text-muted"> - </small>
+              <small class="text-muted">{{ menu.end_hour }}</small>
+            </div>
+           <center> <h3><a class="article-title" >{{ menu.name }}</a></h3></center>
+
+
+              </div>
+        </article>
+
+ <form role="form" name="ord" action={% url "show_menu" menu.id%} method="POST">
+        {% csrf_token %}
+    <select name="Order" id="Order">
+        <option value="inc">price increase</option>
+        <option value="dec">price decrease</option>
+        <option value="pop">popularity</option>
+        <option value="rec">Today recommendation</option>
+        <option value="bus">business deal</option>
+        <input type="submit" name="submit"/>
+    </select>
+    </form>
+
+
+        {% for item in items %}
+     <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ item.name }}</a>
+              <small class="text-muted">{{ item.strat_hour|date:"F d, Y" }}</small>
+                <small class="text-muted"> - </small>
+              <small class="text-muted">{{ item.kind }}</small>
+
+
+
+
+
+            </div>
+            <h4><a class="article-title" >{{ item.name }}</a></h4>
+                <article class="article-content">{{ item.desc }}</article>
+                {% if item.special_price %}
+              <p>Price - <strike>{{ item.price }}</strike> \{{ item.special_price }} ₪ </p>
+                {% else %}
+              <p>Price - {{ item.price }} ₪</p>
+                {% endif %}
+
+
+
+          {% if item.vip_price and is_vip  %}
+
+            <a id="vip_price" style="color: brown"> </a><a style="color: brown">Vip Price - {{ item.vip_price }} ₪</a>
+              <p></p>
+          {% endif %}
+              {% if item.photo %}
+                  <img src= {{item.photo}} width="300" height="200">
+              {% endif %}
+                  <p>Popularity - {{ item.popularity }} stars </p>
+            {% if item.available %}
+          <form role="form" action={% url "add_to_cart" item.menu_key.id%} method="POST">
+                    {% csrf_token %}
+                        <input name="num" type="hidden" value={{ item.id }}>
+                     <input type="submit" name="cart" value="add" >
+                 </form>
+            {% endif %}
+              </div>
+
+        </article>
+
+
+    {% endfor %}
+
+
+
+{% endblock content %}
+
+

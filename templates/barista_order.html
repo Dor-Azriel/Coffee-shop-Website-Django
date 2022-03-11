@@ -1,0 +1,47 @@
+{% extends "brista_Base.html" %}
+{% block content %}
+
+
+
+
+
+
+        {% for item in items %}
+     <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ item.name }}</a>
+              <small class="text-muted">{{ item.strat_hour|date:"F d, Y" }}</small>
+                <small class="text-muted"> - </small>
+              <small class="text-muted">{{ item.kind }}</small>
+
+
+
+
+
+            </div>
+            <h4><a class="article-title" >{{ item.name }}</a></h4>
+                 <p>Price -{{ item.price }} ₪</p>
+                          <article class="article-content">{{ item.desc }}</article>
+
+              {% if item.photo %}
+                  <img src= {{item.photo}} width="300" height="200">
+              {% endif %}
+                  <p>Porularity - {{ item.popularity }} stars </p>
+
+          <form role="form" action={% url "add_to_cart_barista" %} method="POST">
+                    {% csrf_token %}
+                        <input name="num" type="hidden" value={{ item.id }}>
+                     <input type="submit" name="cart" value="add" >
+                 </form>
+
+              </div>
+
+        </article>
+
+
+    {% endfor %}
+
+
+
+{% endblock content %}

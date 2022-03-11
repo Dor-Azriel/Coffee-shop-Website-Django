@@ -1,0 +1,15 @@
+{% extends "brista_Base.html" %}
+{% block content %}
+
+    <article class="media content-section">
+        <form role="form" action={% url "payment_cash"  %} method="POST">
+            {% csrf_token %}
+            <input type="submit" name="cash" value="Pay with Cash" >
+        </form>
+        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    <form role="form" action={% url "pay"  %} method="POST">
+            {% csrf_token %}
+            <input type="submit" name="credit" value="Pay with Credit-card" >
+        </form>
+    </article>
+{% endblock content %}

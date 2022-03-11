@@ -1,0 +1,12 @@
+{% extends "Base.html" %}
+{% block content %}
+  <article class="media content-section">
+          <div class="media-body">
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <input type="submit" value="Confirm">
+</form>
+                                            </div>
+
+        </article>
+{% endblock content %}

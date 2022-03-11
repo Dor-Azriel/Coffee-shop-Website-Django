@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}">
+
+    {% if title %}
+        <title>Time Management System - </title>
+    {% else %}
+        <title>Time Management System</title>
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'barista' %}">Coffee-Shop</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'barista' %}">Home</a>
+              <a class="nav-item nav-link" href="{% url 'barista' %}">Open orders</a>
+                <a class="nav-item nav-link" href="{% url 'barista_order' %}">Make Order</a>
+                <a class="nav-item nav-link" href="{% url 'wait_pay' %}">Waiting for payment</a>
+                <a class="nav-item nav-link" href="{% url 'cart' %}">Order</a>
+
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+              {% endif %}
+
+                {% if user.groups %}
+
+            {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+
+          {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-4">
+             <div class="content-section">
+            <center><h3> Coffee-shop </h3></center>
+           <center> <small><p class='text-muted'> Best coffee-shop in town
+              <ul class="list-group"></small></center>
+                  <img src= "https://blog.elite-coffee.co.il/wp-content/uploads/2017/04/israel-coffee-desktop.jpg" width="300" height="200">
+              <center> <small><p class='text-muted'> All coffee types in one place !
+              <ul class="list-group"></small></center>
+                  <img src= "https://ucarecdn.com/a9407bae-0fc6-47ed-ba4d-0927766c7e0b/-/format/auto/-/preview/3000x3000/-/quality/lighter/coffee-beans-wooden-spoon-white-wood-table.jpg" width="300" height="200">
+
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+
+
+</html>

@@ -1,0 +1,33 @@
+{% extends "Base.html" %}
+{% block content %}
+
+    
+    {% for table in tables %}
+     <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#"></a>
+              <small class="text-muted">Table located {{ table.loc }}</small>
+            </div>
+            <h4><a class="article-title" >Table number - {{ table.number }}</a></h4>
+              {% if  table.reserve %}
+               <small> <a>Table reserved </a></small>
+              {% else %}
+               <small> <a>Available </a></small>
+              {% endif %}
+              <p>Number of seats - {{ table.add}} </p>
+
+                  <form role="form" action={% url "save_table" %} method="POST">
+                    {% csrf_token %}
+                        <input name="num" type="hidden" value={{ table.id }}>
+                     <input type="submit" name="choose" value="reserve" >
+                 </form>
+
+          </div>
+
+        </article>
+
+
+    {% endfor %}
+
+{% endblock content %}
